@@ -203,7 +203,7 @@ class LogisticRegression():
 
 # 1. DESCARGA DEL DATASET
 # =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-print("\n[1] DESCARGANDO DATASET...")
+print("\n[1] DESCARGANDO DATASET")
 print("-" * 80)
 try:
     mushroom = fetch_ucirepo(id=73)
@@ -222,7 +222,7 @@ except Exception as e:
 target_col = y.columns[0]
 y_series = y[target_col].astype(str)
 
-print("\nProblema identificado: CLASIFICACION BINARIA")
+print("\nCLASIFICACION BINARIA")
 print("Variable objetivo: '{}'".format(target_col))
 print("Valores unicos en el objetivo: {}".format(sorted(y_series.unique())))
 
@@ -299,7 +299,7 @@ for i, col in enumerate(X.columns[:4]):
 plt.tight_layout()
 plt.savefig('outputs/02_frecuencia_rasgos.png', dpi=150, bbox_inches='tight')
 plt.close()
-print("Grafica guardada: outputs/02_frecuencia_rasgos.png")
+print("Grafica guardada, se guardo en: outputs/02_frecuencia_rasgos.png")
 
 
 # 3. PREPARACION DE DATOS
@@ -309,14 +309,11 @@ print("-" * 80)
 print("""
 Los dos modelos necesitan representaciones distintas:
 
-  - ARBOL DE DECISION: trabaja directamente con los rasgos CATEGORICOS
-    (cadenas de texto). El arbol parte el conjunto preguntando '¿rasgo == valor?',
-    asi que NO se codifica nada.
+  - ARBOL DE DECISION: trabaja directamente con los rasgos categoricos.
 
   - REGRESION LOGISTICA: es un modelo lineal y calcula theta . x. Los rasgos son
-    categoricos NOMINALES (no tienen orden), por lo que se aplica codificacion
-    ONE-HOT (una columna binaria por categoria). Asignar enteros 0,1,2,... a las
-    categorias introduciria un orden falso que el modelo lineal tomaria literal.
+    categoricos NOMINALES, por lo que se aplica codificacion
+    ONE-HOT.
 """)
 
 # para el TREE arreglos numpy de cadenas (datos crudos)
@@ -343,11 +340,10 @@ print("\n[3.1] JUSTIFICACION DE LOS MODELOS")
 print("-" * 80)
 print("""
 Se eligen dos modelos vistos en el curso que abordan la clasificacion desde
-paradigmas distintos, lo que hace la comparacion mas informativa:
+paradigmas distintos:
 
 1. ARBOL DE DECISION (modelo NO parametrico):
-   - Clasifica con una jerarquia de reglas '¿rasgo == valor?', muy natural para
-     datos categoricos como los de los hongos.
+   - Clasifica con una jerarquia de reglas '¿rasgo == valor?'.
    - Es directamente interpretable: el arbol resultante son las reglas mismas.
    - No asume forma de la frontera de decision ni necesita codificacion.
 
@@ -356,7 +352,7 @@ paradigmas distintos, lo que hace la comparacion mas informativa:
      lineal de los rasgos.
    - Aprende un peso theta_i por categoria; esos pesos son el "estado de
      creencias" del modelo: que tanto empuja cada categoria hacia 'venenoso'.
-   - Sirve de contraste: un modelo lineal frente a uno basado en reglas.
+   - Sirve de contraste: un modelo lineal contra uno basado en reglas.
 """)
 
 
@@ -617,9 +613,7 @@ with open('outputs/CONCLUSIONES.txt', 'w', encoding='utf-8') as f:
     f.write(conclusiones)
 
 print("=" * 80)
-print("PROYECTO COMPLETADO")
-print("=" * 80)
-print("\nArchivos generados en outputs/:")
+print("\n Resumen de Archivos generados en outputs/:")
 for nombre in ["01_distribucion_clases.png", "02_frecuencia_rasgos.png",
                "03_comparacion_metricas.png", "04_matrices_confusion.png",
                "05_pesos_regresion.png", "arbol_decision.txt", "CONCLUSIONES.txt"]:
